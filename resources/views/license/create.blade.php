@@ -42,47 +42,41 @@
                                         <x-text-input id="license_number" name="license_number" type="text"
                                             class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
                                             :value="old('license_number', $license?->license_number)" autocomplete="license_number"
-                                            placeholder="Numero de licencia" />
+                                            placeholder="Numero de licencia" required />
                                         <x-input-error class="mt-2" :messages="$errors->get('license_number')" />
                                     </div>
 
-                                    <!-- Fecha de expedición -->
+                                    <!-- Fecha de expedición (EDITABLE) -->
                                     <div>
-                                        <x-input-label for="issued_date" :value="__('Fecha de expedicion')"
+                                        <x-input-label for="issued_date" :value="__('Fecha de expedición')"
                                             class="text-gray-700 dark:text-gray-300" />
                                         <x-text-input id="issued_date" name="issued_date" type="date"
                                             class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
-                                            :value="old(
-                                                'issued_date',
-                                                optional($license)->getRawOriginal('issued_date'),
-                                            )" autocomplete="issued_date" />
+                                            :value="old('issued_date')" required />
                                         <x-input-error class="mt-2" :messages="$errors->get('issued_date')" />
                                     </div>
 
-                                    <!-- Fecha de vencimiento -->
+                                    <!-- Fecha de vencimiento (calculada automáticamente) -->
                                     <div>
                                         <x-input-label for="expiry_date" :value="__('Fecha de vencimiento')"
                                             class="text-gray-700 dark:text-gray-300" />
                                         <x-text-input id="expiry_date" name="expiry_date" type="date"
                                             class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
-                                            :value="old(
-                                                'expiry_date',
-                                                optional($license)->getRawOriginal('expiry_date'),
-                                            )" autocomplete="expiry_date" />
+                                            :value="old('expiry_date')" readonly required />
                                         <x-input-error class="mt-2" :messages="$errors->get('expiry_date')" />
                                     </div>
 
-                                    
-                                    <!-- Tipo de licencia -->
+                                    <!-- Categorías de licencia como checkboxes -->
+                                    <!-- Tipo de Licencia como select -->
                                     <div>
-                                        <x-input-label for="license_type_id" :value="__('Tipo de licencia')"
+                                        <x-input-label for="license_type_id" :value="__('Tipo de Licencia')"
                                             class="text-gray-700 dark:text-gray-300" />
-                                        <select id="license_type_id" name="license_type_id"
-                                            class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500">
-                                            <option value="">Seleccione un tipo</option>
+                                        <select id="license_type_id" name="license_type_id" required
+                                            class="mt-2 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500">
+                                            <option value="">{{ __('Seleccione un tipo de licencia') }}</option>
                                             @foreach ($licenseTypes as $type)
                                                 <option value="{{ $type->id }}"
-                                                    @if (old('license_type_id') == $type->id) selected @endif>
+                                                    {{ old('license_type_id') == $type->id ? 'selected' : '' }}>
                                                     {{ $type->code }} - {{ $type->description }}
                                                 </option>
                                             @endforeach
@@ -97,13 +91,16 @@
                                         </x-primary-button>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
-                    {{-- /Formulario --}}
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Script para cálculo automático -->
+    <x-slot name="scripts">
+        <script src="{{ asset('js/date.js') }}"></script>
+    </x-slot>
 </x-app-layout>

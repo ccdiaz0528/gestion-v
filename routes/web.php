@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LicenseController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\VehicleDocumentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,5 +25,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('vehicles', VehicleController::class);
     Route::resource('licenses', LicenseController::class);
+    Route::resource('vehicle-documents', VehicleDocumentController::class);
 });
 require __DIR__.'/auth.php';
