@@ -23,7 +23,7 @@ class VehicleRequest extends FormRequest
     {
         return [
 			'brand' => 'required|string',
-			'number_plate' => 'required|string',
+			'plate' => 'required|string',
 			'model' => 'required|string',
 			'color' => 'required|string',
         ];

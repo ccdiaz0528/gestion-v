@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\LicenseController;
+use App\Http\Controllers\VehicleController;
 
 Route::get('/', function () {
     return view('welcome');

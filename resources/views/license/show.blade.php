@@ -1,93 +1,64 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-900 dark:text-gray-100 leading-tight">
-            {{ isset($license) ? __('Edit License') : __('Create License') }}
+        <h2 class="font-semibold text-xl text-gray-100 leading-tight">
+            Ver Licencia
         </h2>
     </x-slot>
 
-    <div class="py-12 bg-gray-100 dark:bg-gray-900">
-        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
-            <div class="p-6 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <form method="POST"
-                      action="{{ isset($license) ? route('licenses.update', $license) : route('licenses.store') }}">
-                    @csrf
-                    @if(isset($license))
-                        @method('PUT')
-                    @endif
-
-                    <div class="space-y-6">
-                        <!-- License Number -->
-                        <div>
-                            <x-input-label for="license_number" :value="__('License Number')" class="dark:text-gray-300"/>
-                            <x-text-input
-                                id="license_number"
-                                name="license_number"
-                                type="text"
-                                class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
-                                :value="old('license_number', $license?->license_number)"
-                                autocomplete="license_number"
-                                placeholder="License Number"
-                            />
-                            <x-input-error class="mt-2" :messages="$errors->get('license_number')" />
+    <div class="py-12 bg-gray-900">
+        <div class="max-w-full mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="p-4 sm:p-8 bg-gray-800 shadow sm:rounded-lg">
+                <div class="w-full">
+                    <div class="sm:flex sm:items-center">
+                        <div class="sm:flex-auto">
+                            <h1 class="text-base font-semibold leading-6 text-white">
+                                Ver Licencia
+                            </h1>
+                            <p class="mt-2 text-sm text-gray-300">Detalles de la licencia.</p>
                         </div>
-
-                        <!-- Issued Date -->
-                        <div>
-                            <x-input-label for="issued_date" :value="__('Issued Date')" class="dark:text-gray-300"/>
-                            <x-text-input
-                                id="issued_date"
-                                name="issued_date"
-                                type="date"
-                                class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
-                                :value="old('issued_date', optional($license)->getRawOriginal('issued_date'))"
-                                autocomplete="issued_date"
-                            />
-                            <x-input-error class="mt-2" :messages="$errors->get('issued_date')" />
-                        </div>
-
-                        <!-- Expiry Date -->
-                        <div>
-                            <x-input-label for="expiry_date" :value="__('Expiry Date')" class="dark:text-gray-300"/>
-                            <x-text-input
-                                id="expiry_date"
-                                name="expiry_date"
-                                type="date"
-                                class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
-                                :value="old('expiry_date', optional($license)->getRawOriginal('expiry_date'))"
-                                autocomplete="expiry_date"
-                            />
-                            <x-input-error class="mt-2" :messages="$errors->get('expiry_date')" />
-                        </div>
-
-                        <!-- Type Of License -->
-                        <div>
-                            <x-input-label for="type_of_license" :value="__('Type Of License')" class="dark:text-gray-300"/>
-                            <x-text-input
-                                id="type_of_license"
-                                name="type_of_license"
-                                type="text"
-                                class="mt-1 block w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-900 dark:text-gray-100 focus:border-indigo-500 focus:ring-indigo-500"
-                                :value="old('type_of_license', $license?->type_of_license)"
-                                autocomplete="type_of_license"
-                                placeholder="Type Of License"
-                            />
-                            <x-input-error class="mt-2" :messages="$errors->get('type_of_license')" />
-                        </div>
-
-                        <!-- Submit & Cancel -->
-                        <div class="flex items-center gap-4">
-                            <x-primary-button>
-                                {{ isset($license) ? __('Update') : __('Create') }}
-                            </x-primary-button>
-                            <a
-                                href="{{ route('licenses.index') }}"
-                                class="text-sm text-gray-600 dark:text-gray-400 hover:underline"
-                            >
-                                {{ __('Cancel') }}
+                        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+                            <a href="{{ route('licenses.index') }}"
+                               class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                Volver
                             </a>
                         </div>
                     </div>
-                </form>
+
+                    <div class="flow-root">
+                        <div class="mt-8 overflow-x-auto">
+                            <div class="inline-block min-w-full py-2 align-middle">
+                                <div class="mt-6 border-t border-gray-700">
+                                    <dl class="divide-y divide-gray-700">
+                                        <!-- Número de licencia -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-white">{{ __('Número de Licencia') }}</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ old('license_number', $license?->license_number) }}</dd>
+                                        </div>
+
+                                        <!-- Fecha de expedición -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-white">{{ __('Fecha de Expedición') }}</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ old('issued_date', optional($license)->getRawOriginal('issued_date')) }}</dd>
+                                        </div>
+
+                                        <!-- Fecha de vencimiento -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-white">{{ __('Fecha de Vencimiento') }}</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ old('expiry_date', optional($license)->getRawOriginal('expiry_date')) }}</dd>
+                                        </div>
+
+                                        <!-- Tipo de licencia -->
+                                        <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                                            <dt class="text-sm font-medium leading-6 text-white">{{ __('Tipo de Licencia') }}</dt>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ old('type_of_license', $license?->type_of_license) }}</dd>
+                                        </div>
+
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

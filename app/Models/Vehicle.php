@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Vehicle
  *
+ * @property $id
  * @property $brand
- * @property $number_plate
+ * @property $plate
  * @property $model
  * @property $color
  * @property $created_at
@@ -27,7 +28,7 @@ class Vehicle extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['brand', 'number_plate', 'model', 'color'];
+    protected $fillable = ['brand', 'plate', 'model', 'color'];
 
 
 }

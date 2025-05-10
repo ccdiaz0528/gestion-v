@@ -13,16 +13,16 @@
                     <div class="sm:flex sm:items-center">
                         <div class="sm:flex-auto">
                             <h1 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-100">
-                                {{ __('Update') }} License
+                                Actualiazar Licencia
                             </h1>
                             <p class="mt-2 text-sm text-gray-700 dark:text-gray-300">
-                                Update existing {{ __('License') }}.
+                                Actualiza los datos de la licencia existente.
                             </p>
                         </div>
                         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
                             <a href="{{ route('licenses.index') }}"
                                class="inline-flex items-center px-3 py-2 bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-500 dark:hover:bg-indigo-400 text-white dark:text-gray-100 text-sm font-semibold shadow-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
-                                {{ __('Back') }}
+                                Volver
                             </a>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                                     <!-- Botón Actualizar -->
                                     <div class="flex items-center gap-4">
                                         <x-primary-button
-                                            class="bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-500 dark:hover:bg-indigo-400">
+                                            class="bg-[#4F46E5] hover:bg-[#4338CA]">
                                             {{ __('Update') }}
                                         </x-primary-button>
                                         <a href="{{ route('licenses.index') }}"
