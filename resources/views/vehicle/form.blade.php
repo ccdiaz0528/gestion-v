@@ -29,17 +29,17 @@
     </div>
 
     <div>
-        <x-input-label for="model" :value="__('Modelo')" />
+        <x-input-label for="year" :value="__('Modelo')" />
         <x-text-input
-            id="model"
-            name="model"
+            id="year"
+            name="year"
             type="text"
             class="mt-1 block w-full bg-gray-700 border-gray-600 text-white"
-            :value="old('model', $vehicle?->model)"
-            autocomplete="model"
+            :value="old('year', $vehicle?->year)"
+            autocomplete="year"
             placeholder="Modelo del vehículo"
         />
-        <x-input-error class="mt-2" :messages="$errors->get('model')" />
+        <x-input-error class="mt-2" :messages="$errors->get('year')" />
     </div>
 
     <div>
@@ -56,6 +56,6 @@
         <x-input-error class="mt-2" :messages="$errors->get('color')" />
     </div>
 
-    
+
 
 </div>

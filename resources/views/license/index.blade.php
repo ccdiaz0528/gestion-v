@@ -30,7 +30,7 @@
                                 <table class="w-full divide-y divide-gray-300 dark:divide-gray-700">
                                     <thead class="bg-gray-50 dark:bg-gray-700">
                                         <tr>
-                                            <th class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">#</th>
+                                            <th class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">N°</th>
                                             <th class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">Número de licencia</th>
                                             <th class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">Expedición</th>
                                             <th class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">Vencimiento</th>
@@ -47,7 +47,7 @@
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $license->license_number }}</td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $license->issued_date }}</td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $license->expiry_date }}</td>
-                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $license->type_of_license }}</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ optional($license->licenseType)->code ?? 'Sin tipo' }}</td>
                                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium">
                                                     <form action="{{ route('licenses.destroy', $license) }}" method="POST">
                                                         <a href="{{ route('licenses.show', $license) }}" class="text-gray-600 dark:text-gray-400 font-bold hover:text-gray-900 dark:hover:text-white mr-2">Ver</a>

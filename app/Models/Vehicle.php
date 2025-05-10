@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Vehicle extends Model
 {
-    
+
     protected $perPage = 20;
 
     /**
@@ -28,7 +28,10 @@ class Vehicle extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['brand', 'plate', 'model', 'color'];
+    protected $fillable = ['brand', 'plate', 'year', 'color'];
 
-
+  public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

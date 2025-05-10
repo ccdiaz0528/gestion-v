@@ -16,16 +16,38 @@ class LicenseRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-			'license_number' => 'required|string',
-			'issued_date' => 'required',
-			'expiry_date' => 'required',
-			'type_of_license' => 'required|string',
-        ];
-    }
+{
+    return [
+        'license_number' => [
+            'required',
+            'numeric',
+            'digits:10',
+            'unique:licenses,license_number,' . $this->license?->id,
+        ],
+        'issued_date' => [
+            'required',
+            'date',
+            'before:expiry_date',
+        ],
+        'expiry_date' => [
+            'required',
+            'date',
+            'after:issued_date',
+        ],
+        'license_type_id' => [
+            'required',
+            'exists:license_types,id',
+        ],
+    ];
+}
+
+public function messages(): array
+{
+    return [
+        'license_type_id.required' => 'Debe seleccionar un tipo de licencia válido.',
+        'license_type_id.exists' => 'El tipo de licencia seleccionado no existe en el sistema.',
+    ];
+}
 }

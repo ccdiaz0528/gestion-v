@@ -11,12 +11,18 @@ use Illuminate\View\View;
 
 class VehicleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): View
     {
-        $vehicles = Vehicle::paginate();
+        // Mostrar solo los vehículos del usuario autenticado
+        $vehicles = $request->user()->vehicles()->paginate();
 
         return view('vehicle.index', compact('vehicles'))
             ->with('i', ($request->input('page', 1) - 1) * $vehicles->perPage());
@@ -37,7 +43,8 @@ class VehicleController extends Controller
      */
     public function store(VehicleRequest $request): RedirectResponse
     {
-        Vehicle::create($request->validated());
+        // Asignar automáticamente el user_id
+        $request->user()->vehicles()->create($request->validated());
 
         return Redirect::route('vehicles.index')
             ->with('success', 'Vehicle created successfully.');
@@ -48,7 +55,12 @@ class VehicleController extends Controller
      */
     public function show($id): View
     {
-        $vehicle = Vehicle::find($id);
+        // Verificar que sea del usuario
+        $vehicle = auth()->user()->vehicles()->find($id);
+
+        if (!$vehicle) {
+            abort(404, 'Vehicle not found or does not belong to you.');
+        }
 
         return view('vehicle.show', compact('vehicle'));
     }
@@ -58,7 +70,11 @@ class VehicleController extends Controller
      */
     public function edit($id): View
     {
-        $vehicle = Vehicle::find($id);
+        $vehicle = auth()->user()->vehicles()->find($id);
+
+        if (!$vehicle) {
+            abort(404, 'Vehicle not found or does not belong to you.');
+        }
 
         return view('vehicle.edit', compact('vehicle'));
     }
@@ -68,15 +84,29 @@ class VehicleController extends Controller
      */
     public function update(VehicleRequest $request, Vehicle $vehicle): RedirectResponse
     {
+        // Validar que el vehículo pertenezca al usuario
+        if ($vehicle->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
         $vehicle->update($request->validated());
 
         return Redirect::route('vehicles.index')
             ->with('success', 'Vehicle updated successfully');
     }
 
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id): RedirectResponse
     {
-        Vehicle::find($id)->delete();
+        $vehicle = auth()->user()->vehicles()->find($id);
+
+        if (!$vehicle) {
+            abort(404, 'Vehicle not found or does not belong to you.');
+        }
+
+        $vehicle->delete();
 
         return Redirect::route('vehicles.index')
             ->with('success', 'Vehicle deleted successfully');

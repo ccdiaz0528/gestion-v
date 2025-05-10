@@ -50,7 +50,7 @@
                                         <!-- Tipo de licencia -->
                                         <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                                             <dt class="text-sm font-medium leading-6 text-white">{{ __('Tipo de Licencia') }}</dt>
-                                            <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ old('type_of_license', $license?->type_of_license) }}</dd>
+                                            <dd class="mt-1 text-sm leading-6 text-gray-300 sm:col-span-2 sm:mt-0">{{ optional($license->licenseType)->code ?? 'Sin tipo' }} - {{ optional($license->licenseType)->description ?? 'Sin tipo' }}</dd>
                                         </div>
 
                                     </dl>

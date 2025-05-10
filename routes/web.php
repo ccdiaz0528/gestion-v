@@ -20,7 +20,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::resource('vehicles', VehicleController::class);
-Route::resource('licenses', LicenseController::class);
 
+Route::middleware('auth')->group(function () {
+    Route::resource('vehicles', VehicleController::class);
+    Route::resource('licenses', LicenseController::class);
+});
 require __DIR__.'/auth.php';

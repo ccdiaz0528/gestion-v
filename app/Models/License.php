@@ -32,7 +32,7 @@ class License extends Model
         'license_number',
         'issued_date',
         'expiry_date',
-        'type_of_license'
+        'license_type_id', // Asegúrate de incluir este campo
     ];
 
     /**
@@ -95,4 +95,14 @@ class License extends Model
     {
         return $value ? Carbon::parse($value)->format('d/m/Y') : null;
     }
+
+      public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function licenseType()
+{
+    return $this->belongsTo(LicenseType::class);
+}
 }

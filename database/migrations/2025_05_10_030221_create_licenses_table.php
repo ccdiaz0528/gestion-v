@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('licenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('license_number')->unique();
             $table->date('issued_date');
             $table->date('expiry_date');

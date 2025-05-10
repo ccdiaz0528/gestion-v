@@ -41,7 +41,7 @@
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900 dark:text-white">{{ ++$i }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $vehicle->brand }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $vehicle->plate }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $vehicle->model }}</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $vehicle->year }}</td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">{{ $vehicle->color }}</td>
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium">
                                                 <form action="{{ route('vehicles.destroy', $vehicle->id) }}" method="POST">
